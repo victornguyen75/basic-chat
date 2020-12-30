@@ -16,7 +16,7 @@
   <body>
     <ul id="messages"></ul>
     <form action="">
-      <input id="m" autocomplete="off" />
+      <input id="message" autocomplete="off" />
       <button>Send</button>
     </form>
   </body>
@@ -27,8 +27,8 @@
       const socket = io();
       $('form').submit((e) => {
         e.preventDefault(); // Prevents page reloading
-        socket.emit('chat message', $('#m').val());
-        $('#m').val('');
+        socket.emit('chat message', $('#message').val());
+        $('#message').val('');
         return false;
       });
       socket.on('chat message', msg => {
