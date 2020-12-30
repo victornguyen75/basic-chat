@@ -25,14 +25,24 @@
   <script>
     $(() => {
       const socket = io();
+
       $('form').submit((e) => {
         e.preventDefault(); // Prevents page reloading
         socket.emit('chat message', $('#message').val());
         $('#message').val('');
         return false;
       });
+
       socket.on('chat message', msg => {
         $('#messages').append($('<li>').text(msg));
+      });
+
+      socket.on('user connected', () => {
+        $('#messages').append($('<li>').text('A user has connected!'));
+      });
+
+      socket.on('user disconnected', () => {
+        $('#messages').append($('<li>').text('A user has disconnected!'));
       });
     });
   </script>
