@@ -8,14 +8,15 @@ APP.get('/', (req, res) => {
 });
 
 IO.on('connection', socket => {
-  IO.emit('user connected');
+  IO.emit('user connected', socket.id.substr(0,3));
 
   socket.on('chat message', msg => {
-    IO.emit('chat message', msg);
+    if (msg === "") return;
+    IO.emit('chat message', `${socket.id.substr(0,3)} said ${msg}`);
   });
 
   socket.on('disconnect', () => {
-    IO.emit('user disconnected');
+    IO.emit('user disconnected', socket.id.substr(0,3));
   });
 });
 

@@ -34,17 +34,16 @@
       });
 
       socket.on('chat message', msg => {
-        if (msg === "") return;
         $('#messages').append($('<li>').text(msg));
         window.scrollTo(0, document.body.scrollHeight);
       });
 
-      socket.on('user connected', () => {
-        $('#messages').append($('<li>').text('A user has connected!'));
+      socket.on('user connected', id => {
+        $('#messages').append($('<li>').text(`${id} has connected!`));
       });
 
-      socket.on('user disconnected', () => {
-        $('#messages').append($('<li>').text('A user has disconnected!'));
+      socket.on('user disconnected', id => {
+        $('#messages').append($('<li>').text(`${id} has disconnected!`));
       });
     });
   </script>
