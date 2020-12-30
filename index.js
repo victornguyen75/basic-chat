@@ -12,7 +12,7 @@ IO.on('connection', socket => {
 
   socket.on('chat message', msg => {
     if (msg === "") return;
-    IO.emit('chat message', `${socket.id.substr(0,3)} said ${msg}`);
+    IO.emit('chat message', socket.id.substr(0,3), msg);
   });
 
   socket.on('disconnect', () => {
